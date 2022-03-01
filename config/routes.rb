@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'password_reset/new'
-  get 'password_reset/create'
+  
   #GET /about and use the about controller with index action
   get "about", to: "about#index"
                                         # edit rails default path name "password" to edit_password
@@ -14,6 +13,13 @@ Rails.application.routes.draw do
   post "sign_in", to: "sessions#create"
   
   delete "logout", to: "sessions#destroy"
+
+  get 'password/reset', to: "password_reset#new"
+  post 'password/reset', to: "password_reset#create"
+  get 'password/reset/edit', to: "password_reset#edit"
+  patch 'password/reset/edit', to: "password_reset#update"
+
+  get "/auth/twitter/callback", to: "omniauth_callbacks#twitter"
 
   root to: "main#index"
 end
